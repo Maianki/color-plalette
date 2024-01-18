@@ -8,6 +8,6 @@ const {
 paletteRoutes.use(bodyParser.urlencoded({ extended: false }));
 paletteRoutes.use(bodyParser.json());
 
-paletteRoutes.get('/colour-palette', getColourPalette);
+paletteRoutes.post('/colour-palette', getColourPalette);
 
 module.exports = paletteRoutes;

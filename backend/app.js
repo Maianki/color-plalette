@@ -4,7 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
 const paletteRoutes = require('./routes/palette.route');
-// require('dotenv').config();
+require('dotenv').config();
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
