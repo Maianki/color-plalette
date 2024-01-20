@@ -1,16 +1,17 @@
 const OpenAI = require("openai");
 
 const getColourPalette = (req, res) => {
-   const prompt = req.params.prompt;
+   const prompt = req.body.prompt;
+
 
    if(typeof prompt == 'string' && prompt.length > 0){
       let colors = [];
       (async function(){
          colors= await getPaletteFromOpenaiAPI(prompt);
-         if(typeof colors?.choice != 'undefined' && colors?.choice[0]?.text){
+         if(typeof colors?.choices != 'undefined' && colors?.choices[0]?.text){
             return res.json({
                "statusCode" : 200,
-               "colors": colors
+               "colors": colors?.choices[0]?.text
             });
          }else{
             return res.json({
