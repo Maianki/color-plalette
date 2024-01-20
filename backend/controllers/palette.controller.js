@@ -11,7 +11,7 @@ const getColourPalette = (req, res) => {
          if(typeof colors?.choices != 'undefined' && colors?.choices[0]?.text){
             return res.json({
                "statusCode" : 200,
-               "colors": colors?.choices[0]?.text
+               "colors": JSON.parse(colors?.choices[0]?.text)
             });
          }else{
             return res.json({
@@ -40,7 +40,7 @@ const getPaletteFromOpenaiAPI = async (prompt)=>{
            Q: Convert the following verbal description of a color palette into a list of colors: sage, nature, earth
            A: ["#EDF1D6", "#9DC08B", "#609966", "#40513B"]
      
-           Output Format: An array of four hexadecimal color codes
+           Output Format: Always keep an array of four hexadecimal color codes
            Q: Convert the following verbal description of a color palette into a list of colors: ${prompt} 
            A:
            `,
