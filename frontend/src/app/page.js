@@ -1,7 +1,9 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import { FallingLines } from 'react-loader-spinner'
+import { FallingLines } from 'react-loader-spinner';
+import { MdContentCopy } from "react-icons/md";
+import toast, { Toaster } from 'react-hot-toast';
 
 
 export default function Home() {
@@ -9,6 +11,8 @@ export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [colours, setColours] = useState(['#F8AE8A', '#F4C2F4', '#F2CD60', '#3D348B']);
   const [isload, setIsload] = useState(false);
+
+  const notify = () => toast('Copied!');
 
   async function getColourPalette(){
     setIsload(true);
@@ -33,12 +37,35 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <div className=" overflow-hidden">
+      <Toaster
+        position="bottom-center"
+        reverseOrder={false}
+        gutter={8}
+        toastOptions={{
+          className: '',
+          duration: 2000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+
+          success: {
+            duration: 3000,
+            theme: {
+              primary: 'green',
+              secondary: 'black',
+            },
+          },
+      }}
+    />
     <main className="flex flex-row w-screen relative">
 
       {
         colours.length > 0 && colours.map((colour, index )=>{
-          return <div key={index} onClick={() => { navigator.clipboard.writeText(colour)} }style={{height:"100vh",backgroundColor:colour}} className="grow cursor-pointer text-center">{colour}</div>
+          return <div key={index} onClick={() => { navigator.clipboard.writeText(colour); notify()} }style={{height:"100vh",backgroundColor:colour}} className="grow cursor-pointer flex items-end justify-center pb-12">
+           <p className="flex gap-1 items-center"> {colour} <MdContentCopy/> </p>
+            </div>
         })
       }
       
