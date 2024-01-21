@@ -38,7 +38,7 @@ export default function Home() {
 
       {
         colours.length > 0 && colours.map((colour, index )=>{
-          return <div key={index} style={{height:"100vh",backgroundColor:colour}} className="grow"></div>
+          return <div key={index} onClick={() => { navigator.clipboard.writeText(colour)} }style={{height:"100vh",backgroundColor:colour}} className="grow cursor-pointer text-center">{colour}</div>
         })
       }
       
